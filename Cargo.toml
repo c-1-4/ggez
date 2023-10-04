@@ -26,10 +26,10 @@ path = "src/lib.rs"
 [features]
 default = ["c_dependencies", "audio", "gamepad"]
 zip-compression = ["zip/bzip2", "zip/zstd"]
-mp3 = ["rodio/mp3"]
+#mp3 = ["rodio/mp3"]
 multithread-image-decoding = ["image/hdr", "image/jpeg_rayon"]
 c_dependencies = ["zip-compression", "mp3"]
-audio = ["rodio"]
+#audio = ["rodio"]
 gamepad = ["gilrs"]
 
 [dependencies]
@@ -50,11 +50,11 @@ image = { version = "0.24", default-features = false, features = [
    "dxt",
    "jpeg"
 ] }
-rodio = { version = "0.17", optional = true, default-features = false, features = [
-   "flac",
-   "vorbis",
-   "wav",
-] }
+#rodio = { version = "0.17", optional = true, default-features = false, features = [
+#   "flac",
+#   "vorbis",
+#   "wav",
+#] }
 serde = { version = "1.0", features = ["derive"] }
 toml = "0.5"
 log = "0.4"
