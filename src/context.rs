@@ -5,8 +5,6 @@ use std::fmt;
 /// without having to mess around figuring it out.
 pub use winit;
 
-#[cfg(feature = "audio")]
-use crate::audio;
 use crate::conf;
 use crate::error::GameResult;
 use crate::filesystem::Filesystem;
@@ -43,8 +41,6 @@ pub struct Context {
     /// Timer state.
     pub time: timer::TimeContext,
     /// Audio context.
-    #[cfg(feature = "audio")]
-    pub audio: audio::AudioContext,
     /// Keyboard input context.
     pub keyboard: input::keyboard::KeyboardContext,
     /// Mouse input context.
@@ -126,7 +122,7 @@ impl Has<GraphicsContext> for Context {
         &self.gfx
     }
 }
-
+/*
 #[cfg(feature = "audio")]
 impl Has<audio::AudioContext> for Context {
     #[inline]
@@ -134,6 +130,7 @@ impl Has<audio::AudioContext> for Context {
         &self.audio
     }
 }
+*/
 
 /// Used to represent types that can provide a certain context type in a mutable form.
 /// See also [`Has<T>`].
@@ -172,8 +169,8 @@ impl Context {
         conf: conf::Conf,
         fs: Filesystem,
     ) -> GameResult<(Context, winit::event_loop::EventLoop<()>)> {
-        #[cfg(feature = "audio")]
-        let audio_context = audio::AudioContext::new(&fs)?;
+        //#[cfg(feature = "audio")]
+        //let audio_context = audio::AudioContext::new(&fs)?;
         let events_loop = winit::event_loop::EventLoop::new();
         let timer_context = timer::TimeContext::new();
         let graphics_context =
@@ -186,8 +183,8 @@ impl Context {
             continuing: true,
             quit_requested: false,
             time: timer_context,
-            #[cfg(feature = "audio")]
-            audio: audio_context,
+            //#[cfg(feature = "audio")]
+            //audio: audio_context,
             keyboard: input::keyboard::KeyboardContext::new(),
             mouse: input::mouse::MouseContext::new(),
             #[cfg(feature = "gamepad")]
